@@ -1,0 +1,26 @@
+"""
+main.py
+Entry point for the ShopZyla Drop AI Auto-Lister app.
+Fetches products from ShopZyla and lists them to your store.
+"""
+
+from scraper import fetch_products
+from lister import list_product
+
+def run_auto_lister():
+    """
+    Main function to run the auto-lister.
+    Fetches products from ShopZyla API and lists them to your store.
+    """
+    products = fetch_products("electronics")  # Example category
+    
+    if not products:
+        print("No products fetched.")
+        return
+
+    for product in products:
+        status, text = list_product(product)
+        print(f"Listed: {product['title']} - Status: {status}")
+
+if __name__ == "__main__":
+    run_auto_lister()
